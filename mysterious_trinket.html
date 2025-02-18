@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Livre Mystérieux</title>
+    <style>
+        body {
+            background: url('https://source.unsplash.com/1600x900/?magic,stars') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: center;
+        }
+        .hidden { display: none; }
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 10px;
+            text-align: center;
+        }
+        button {
+            background: gold;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover { background: orange; }
+    </style>
+</head>
+<body>
+    <div id="step1" class="fade-in">
+        <h1>Un livre mystérieux apparaît...</h1>
+        <img src="https://source.unsplash.com/300x400/?oldbook" alt="Livre" onclick="showStep(2)">
+    </div>
+
+    <div id="step2" class="hidden fade-in">
+        <h1>Le livre est verrouillé par un cadenas...</h1>
+        <p>Devine le mot de passe :</p>
+        <input type="text" id="password" placeholder="Tape ici...">
+        <button onclick="checkPassword()">Ouvrir</button>
+        <p id="error" style="color: red; display: none;">Mauvais mot de passe...</p>
+    </div>
+
+    <div id="step3" class="hidden fade-in">
+        <h1>Le livre s'ouvre et une lumière magique t'entoure !</h1>
+        <button onclick="window.location.href='https://creator.nightcafe.studio'">Rejoindre l'aventure</button>
+    </div>
+
+    <script>
+        function showStep(step) {
+            document.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
+            document.getElementById('step' + step).classList.remove('hidden');
+        }
+        function checkPassword() {
+            const pass = document.getElementById('password').value.toUpperCase();
+            if (pass === "CHAT") {
+                showStep(3);
+            } else {
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
